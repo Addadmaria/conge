@@ -22,8 +22,5 @@ public class TypeDeConge {
     @Column(name = "nameofleave", nullable = false, unique = true)
     private String nameOfLeave;
 
-    // Custom constructor without ID
-    public TypeDeConge(String nameOfLeave) {
-        this.nameOfLeave = nameOfLeave;
-    }
+    
 }

@@ -27,8 +27,10 @@ public class Droitdeconge {
     private int nbrJoursRestants;  // Nouvelle colonne ajoutée
 
     @ManyToOne
-    @JoinColumn(name = "matricule")
-    private Employe matricule;  // Stocke directement le matricule (si ce n'est pas une clé étrangère)
+    @JoinColumn(name = "matricule", nullable = false)
+    @JsonProperty("matricule")
+    private Employe matricule;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idexercice")  // Supposant que c'est une clé étrangère vers Exercice

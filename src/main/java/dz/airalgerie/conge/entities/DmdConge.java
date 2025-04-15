@@ -52,10 +52,59 @@ public class DmdConge {
     
     @ManyToOne
     @JoinColumn(name = "matricule")
-    private Employe employe;
+    private Employe matricule;
 
     @ManyToOne
     @JoinColumn(name = "typeconge")
     private TypeDeConge typeconge;
+
+	public DmdConge( Date datededamande, int duree, Employe matricule, TypeDeConge typeconge) {
+		this.datededamande = datededamande;
+		this.duree = duree;
+		this.matricule = matricule;
+		this.typeconge = typeconge;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getDatededamande() {
+		return datededamande;
+	}
+
+	public void setDatededamande(Date datededamande) {
+		this.datededamande = datededamande;
+	}
+
+	public int getDuree() {
+		return duree;
+	}
+
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
+
+	public Employe getMatricule() {
+		return matricule;
+	}
+
+	public void setMatricule(Employe matricule) {
+		this.matricule = matricule;
+	}
+
+	public TypeDeConge getTypeconge() {
+		return typeconge;
+	}
+
+	public void setTypeconge(TypeDeConge typeconge) {
+		this.typeconge = typeconge;
+	}
+    
+    
 
 }

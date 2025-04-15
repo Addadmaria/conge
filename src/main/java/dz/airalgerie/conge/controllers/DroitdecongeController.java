@@ -1,6 +1,7 @@
 package dz.airalgerie.conge.controllers;
 
 import dz.airalgerie.conge.entities.Droitdeconge;
+import dz.airalgerie.conge.entities.Droitdeconge;
 import dz.airalgerie.conge.services.DroitDeCongeService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,5 +24,8 @@ public class DroitdecongeController {
     public Droitdeconge createDroitdeconge(@RequestBody Droitdeconge droitdeconge) {
         return droitdecongeService.addDroiDeConge(droitdeconge);
     }
-
+    @GetMapping("/all")
+    public List<Droitdeconge> getAllDroitdeconges() {
+       return droitdecongeService.getAllDroits();
+    }
 }

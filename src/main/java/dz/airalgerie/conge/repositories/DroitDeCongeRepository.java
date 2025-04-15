@@ -9,6 +9,5 @@ import dz.airalgerie.conge.entities.Droitdeconge;
 
 
 @Repository
-public interface DroitDeCongeRepository extends JpaRepository< Droitdeconge , Integer > {
-	
+public interface DroitDeCongeRepository extends JpaRepository<Droitdeconge, Long> {
 }
