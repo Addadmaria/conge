@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 @Entity
-@Table(name = "dmdcongee", schema = "dbo")
+@Table(name = "dmdconge", schema = "dbo")
 @Data
 @NoArgsConstructor
 @Builder
@@ -43,17 +43,19 @@ public class DmdConge {
     private Long id;
 
     @Column(name = "datededamande")
+    @JsonProperty("datededamande")
     private Date datededamande;
 
     @Column(name = "duree")
+    @JsonProperty("duree")
     private int duree;
     
     @ManyToOne
     @JoinColumn(name = "matricule")
-    private Employe matricule;
+    private Employe employe;
 
     @ManyToOne
-    @JoinColumn(name = "type_conge")
+    @JoinColumn(name = "typeconge")
     private TypeDeConge typeconge;
 
 }

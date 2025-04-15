@@ -14,15 +14,5 @@ public class ExerciceController {
     @Autowired
     private ExerciceService exerciceService;
 
-    // Ajouter un exercice
-    @PostMapping
-    public Exercice addExercice(@RequestBody Exercice exercice) {
-        return exerciceService.addExercice(exercice);
-    }
-
-    // Récupérer tous les exercices
-    @GetMapping
-    public List<Exercice> getAllExercices() {
-        return exerciceService.getAllExercices();
-    }
+    
 }
