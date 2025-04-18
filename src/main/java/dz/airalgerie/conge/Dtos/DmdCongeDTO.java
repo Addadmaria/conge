@@ -1,4 +1,4 @@
-package dz.airalgerie.conge.entities;
+package dz.airalgerie.conge.Dtos;
 
 import java.sql.Date;
 

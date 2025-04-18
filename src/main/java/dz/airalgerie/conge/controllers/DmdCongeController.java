@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import dz.airalgerie.conge.Dtos.DmdCongeDTO;
 import dz.airalgerie.conge.entities.DmdConge;
-import dz.airalgerie.conge.entities.DmdCongeDTO;
 import dz.airalgerie.conge.entities.Employe;
 import dz.airalgerie.conge.entities.TypeDeConge;
 import dz.airalgerie.conge.repositories.DmdCongeRepository;
@@ -47,8 +47,6 @@ public class DmdCongeController {
                 employe,
                 typeConge
             );
-        // Build the entity
-
 
 
         // Save it
