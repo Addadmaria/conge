@@ -1,7 +1,6 @@
 package dz.airalgerie.conge.controllers;
 
 import dz.airalgerie.conge.entities.Droitdeconge;
-import dz.airalgerie.conge.entities.Droitdeconge;
 import dz.airalgerie.conge.services.DroitDeCongeService;
 import lombok.RequiredArgsConstructor;
 
