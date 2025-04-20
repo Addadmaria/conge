@@ -43,34 +43,27 @@ public class EmployeController {
     private AffectationRepository affectationRepository;
    
     @PostMapping("/create")
-    public ResponseEntity<?> createConge(@RequestBody EmployeDTO dto) {
-        
-        Role role = roleRepository.findById(dto.getRoleId())
-            .orElseThrow(() -> new RuntimeException("Role not found with id " + dto.getRoleId()));
-
-        Fonction fonction = fonctionRepository.findById(dto.getIdFonction())
-                .orElseThrow(() -> new RuntimeException(" fonction not found"));
-        
+    public ResponseEntity<?> createEmploye(@RequestBody EmployeDTO dto) {
+        Role        role        = roleRepository.findById(dto.getRoleId())  
+                                 .orElseThrow(() -> new RuntimeException("Role not found"));
+        Fonction    fonction    = fonctionRepository.findById(dto.getIdFonction())
+                                 .orElseThrow(() -> new RuntimeException("Fonction not found"));
         Affectation affectation = affectationRepository.findById(dto.getIdAffectation())
-                .orElseThrow(() -> new RuntimeException(" affectation not found"));
-
+                                 .orElseThrow(() -> new RuntimeException("Affectation not found"));
 
         Employe employe = new Employe(
-                dto.getDateEntree(),
-                dto.getName(),
-                dto.getMotdepasse(),
-                dto.getEmail(),
-                dto.getLastname(),
-                role,
-                affectation,
-                fonction
-            );
+            dto.getDateEntree(),
+            dto.getName(),
+            dto.getLastname(),     // ← swap these two
+            dto.getEmail(),
+            dto.getMotdepasse(),
+            role,
+            affectation,
+            fonction
+        );
 
-
-        // Save it
         employeRepository.save(employe);
-
-        return ResponseEntity.ok("compte créée avec succès !");
+        return ResponseEntity.ok("Compte créé avec succès !");
     }
 
 //    @GetMapping("/all")
