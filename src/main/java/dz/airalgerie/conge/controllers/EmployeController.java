@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/api/employes")
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
 public class EmployeController {
 
     @Autowired
