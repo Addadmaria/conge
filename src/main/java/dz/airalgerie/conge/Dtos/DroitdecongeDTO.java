@@ -10,8 +10,7 @@ public class DroitdecongeDTO {
     public DroitdecongeDTO() {
     }
 
-    public DroitdecongeDTO(Long id, int nbrJourConsommes, int nbrJoursRestants, Integer matricule, Integer idExercice) {
-        this.id = id;
+    public DroitdecongeDTO( int nbrJourConsommes, int nbrJoursRestants, Integer matricule, Integer idExercice) {
         this.nbrJourConsommes = nbrJourConsommes;
         this.nbrJoursRestants = nbrJoursRestants;
         this.matricule = matricule;
