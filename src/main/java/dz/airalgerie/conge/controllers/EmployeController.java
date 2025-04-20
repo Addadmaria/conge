@@ -1,48 +1,81 @@
 package dz.airalgerie.conge.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import dz.airalgerie.conge.Dtos.DmdCongeDTO;
+import dz.airalgerie.conge.Dtos.EmployeDTO;
+import dz.airalgerie.conge.entities.Affectation;
+import dz.airalgerie.conge.entities.DmdConge;
 import dz.airalgerie.conge.entities.Employe;
+import dz.airalgerie.conge.entities.Fonction;
+import dz.airalgerie.conge.entities.Role;
+import dz.airalgerie.conge.entities.TypeDeConge;
+import dz.airalgerie.conge.repositories.AffectationRepository;
+import dz.airalgerie.conge.repositories.DmdCongeRepository;
+import dz.airalgerie.conge.repositories.EmployeRepository;
+import dz.airalgerie.conge.repositories.FonctionRepository;
+import dz.airalgerie.conge.repositories.RoleRepository;
+import dz.airalgerie.conge.repositories.TypeDeCongeRepository;
+import dz.airalgerie.conge.services.DmdCongeService;
 import dz.airalgerie.conge.services.EmployeService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/api/employe")
+@RequestMapping(path = "/api/employes")
+@RequiredArgsConstructor
 public class EmployeController {
 
     @Autowired
     private EmployeService employeService;
-
+    
+    @Autowired
+    private EmployeRepository employeRepository;
+    
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private FonctionRepository fonctionRepository;
+    @Autowired
+    private AffectationRepository affectationRepository;
+   
     @PostMapping("/create")
-    public Employe createEmploye(@RequestBody Employe employe) {
-        return employeService.addEmploye(employe);
+    public ResponseEntity<?> createConge(@RequestBody EmployeDTO dto) {
+        
+        Role role = roleRepository.findById(dto.getRoleId())
+            .orElseThrow(() -> new RuntimeException("Role not found with id " + dto.getRoleId()));
+
+        Fonction fonction = fonctionRepository.findById(dto.getIdFonction())
+                .orElseThrow(() -> new RuntimeException(" fonction not found"));
+        
+        Affectation affectation = affectationRepository.findById(dto.getIdAffectation())
+                .orElseThrow(() -> new RuntimeException(" affectation not found"));
+
+
+        Employe employe = new Employe(
+                dto.getDateEntree(),
+                dto.getName(),
+                dto.getMotdepasse(),
+                dto.getEmail(),
+                dto.getLastname(),
+                role,
+                affectation,
+                fonction
+            );
+
+
+        // Save it
+        employeRepository.save(employe);
+
+        return ResponseEntity.ok("compte créée avec succès !");
     }
-    
-    @GetMapping("/employes")
-    public List<Employe> getAllEmployes() {
-        return employeService.getAllEmployes();    
-    }
-    
-    
+
+//    @GetMapping("/all")
+//    public List<DmdConge> getAllDmdConges() {
+//    	return EmployeService.getAllDemandes();
+//    }
+   
 }
-
-
-
-
-
-
-
-

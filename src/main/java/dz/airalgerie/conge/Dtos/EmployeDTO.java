@@ -9,15 +9,15 @@ public class EmployeDTO {
     private LocalDate dateEntree;
     private String email;
     private String motdepasse;
-    private Integer roleId;
-    private Integer idAffectation;
-    private Integer idFonction;
+    private Long roleId;
+    private Long idAffectation;
+    private Long idFonction;
 
     public EmployeDTO() {
     }
 
     public EmployeDTO(Integer matricule, String name, String lastname, LocalDate dateEntree,
-                      String email, String motdepasse, Integer roleId, Integer idAffectation, Integer idFonction) {
+                      String email, String motdepasse, Long roleId, Long idAffectation, Long idFonction) {
         this.matricule = matricule;
         this.name = name;
         this.lastname = lastname;
@@ -77,27 +77,27 @@ public class EmployeDTO {
         this.motdepasse = motdepasse;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public Integer getIdAffectation() {
+    public Long getIdAffectation() {
         return idAffectation;
     }
 
-    public void setIdAffectation(Integer idAffectation) {
+    public void setIdAffectation(Long idAffectation) {
         this.idAffectation = idAffectation;
     }
 
-    public Integer getIdFonction() {
+    public Long getIdFonction() {
         return idFonction;
     }
 
-    public void setIdFonction(Integer idFonction) {
+    public void setIdFonction(Long idFonction) {
         this.idFonction = idFonction;
     }
 }
