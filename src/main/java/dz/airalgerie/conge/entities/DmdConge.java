@@ -37,33 +37,23 @@ import java.util.Date;
 @AllArgsConstructor
 public class DmdConge {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "datededamande")
-    @JsonProperty("datededamande")
     private Date datededamande;
 
     @Column(name = "duree")
-    @JsonProperty("duree")
     private int duree;
-    
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matricule")
     private Employe matricule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "typeconge")
     private TypeDeConge typeconge;
-
-	public DmdConge( Date datededamande, int duree, Employe matricule, TypeDeConge typeconge) {
-		this.datededamande = datededamande;
-		this.duree = duree;
-		this.matricule = matricule;
-		this.typeconge = typeconge;
-	}
 
 	public Long getId() {
 		return id;
@@ -104,7 +94,15 @@ public class DmdConge {
 	public void setTypeconge(TypeDeConge typeconge) {
 		this.typeconge = typeconge;
 	}
+
+	public DmdConge(Date datededamande, int duree, Employe matricule, TypeDeConge typeconge) {
+		this.datededamande = datededamande;
+		this.duree = duree;
+		this.matricule = matricule;
+		this.typeconge = typeconge;
+	}
     
+	
     
 
 }

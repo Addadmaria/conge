@@ -49,9 +49,7 @@ public class DroitdecongeController {
         Droitdeconge droit = new Droitdeconge(
                 dto.getNbrJourConsommes(),
                 dto.getNbrJoursRestants(),
-                employe,
-                idexercice
-            );
+                employe            );
 
 
         // Save it

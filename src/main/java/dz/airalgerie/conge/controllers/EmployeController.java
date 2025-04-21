@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/api/employes")
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
 public class EmployeController {
 
     @Autowired
@@ -53,14 +52,6 @@ public class EmployeController {
                                  .orElseThrow(() -> new RuntimeException("Affectation not found"));
 
         Employe employe = new Employe(
-            dto.getDateEntree(),
-            dto.getName(),
-            dto.getLastname(),     // ← swap these two
-            dto.getEmail(),
-            dto.getMotdepasse(),
-            role,
-            affectation,
-            fonction
         );
 
         employeRepository.save(employe);

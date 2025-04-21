@@ -1,19 +1,29 @@
 package dz.airalgerie.conge.entities;
 
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
 @Table(name = "exercice")
 @Data
-@Builder
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Exercice {
 
     @Id
@@ -22,7 +32,7 @@ public class Exercice {
     private Integer idExercice;
 
     @Column(name = "label", nullable = false)
-    private LocalDate label;
+    private String label;
 
    
     

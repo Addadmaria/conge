@@ -49,7 +49,6 @@ public class DmdCongeController {
             );
 
 
-        // Save it
         dmdCongeRepository.save(demande);
 
         return ResponseEntity.ok("Demande de congé créée avec succès !");
