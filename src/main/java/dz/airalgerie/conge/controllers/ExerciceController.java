@@ -21,7 +21,7 @@ public class ExerciceController {
     @PostMapping("/create")
     public ResponseEntity<?> createExercice(@RequestBody ExerciceDTO dto) {
         Exercice exercice = new Exercice();
-        exercice.setLabel(dto.getLabel()); // 👈 LocalDate (format "yyyy-MM-dd")
+        exercice.setLabel(dto.getLabel()) ; // 👈 LocalDate (format "yyyy-MM-dd")
 
         exerciceRepository.save(exercice);
         

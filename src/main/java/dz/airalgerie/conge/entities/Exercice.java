@@ -34,6 +34,29 @@ public class Exercice {
     @Column(name = "label", nullable = false)
     private String label;
 
+	public Integer getIdExercice() {
+		return idExercice;
+	}
+
+	public void setIdExercice(Integer idExercice) {
+		this.idExercice = idExercice;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public Exercice() {
+		super();
+		this.label = label;
+	}
+
+	
+
    
     
 }

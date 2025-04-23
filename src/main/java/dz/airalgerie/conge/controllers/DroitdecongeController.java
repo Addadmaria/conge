@@ -36,27 +36,29 @@ public class DroitdecongeController {
 	@Autowired
     private ExerciceRepository exerciceRepository;
     
-    @PostMapping("/create")
-    public ResponseEntity<?> createConge(@RequestBody  DroitdecongeDTO dto) {
-        
-        Employe employe = employeRepository.findById(dto.getMatricule())
-            .orElseThrow(() -> new RuntimeException("Employe not found with id " + dto.getMatricule()));
+	@PostMapping("/create")
+	   public ResponseEntity<?> createConge(@RequestBody  DroitdecongeDTO dto) {
+	       
+	       Employe employe = employeRepository.findById(dto.getMatricule())
+	           .orElseThrow(() -> new RuntimeException("Employe not found with id " + dto.getMatricule()));
 
-        Exercice idexercice = exerciceRepository.findById(dto.getIdExercice())
-                .orElseThrow(() -> new RuntimeException("Exercice not found"));
-
-
-        Droitdeconge droit = new Droitdeconge(
-                dto.getNbrJourConsommes(),
-                dto.getNbrJoursRestants(),
-                employe            );
+	       Exercice idexercice = exerciceRepository.findById(dto.getIdExercice())
+	               .orElseThrow(() -> new RuntimeException("Exercice not found"));
 
 
-        // Save it
-        droitDeCongeRepository.save(droit);
+	       Droitdeconge droit = new Droitdeconge(
+	               dto.getNbrJourConsommes(),
+	               dto.getNbrJoursRestants(),
+	               employe,
+	               idexercice         
+	               );
 
-        return ResponseEntity.ok("Droit de congé créée avec succès !");
-    }
+
+	       // Save it
+	       droitDeCongeRepository.save(droit);
+
+	       return ResponseEntity.ok("Droit de congé créée avec succès !");
+	   }
     
     @GetMapping("/all")
     public List<Droitdeconge> getAllDroitdeconges() {

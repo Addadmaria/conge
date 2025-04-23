@@ -16,5 +16,34 @@ import lombok.Setter;
 
 public class ExerciceDTO {
     private Integer idExercice;
-    private LocalDate label;
+    private String label;
+    
+    public ExerciceDTO() {
+    }
+
+	public Integer getIdExercice() {
+		return idExercice;
+	}
+
+	public void setIdExercice(Integer idExercice) {
+		this.idExercice = idExercice;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public ExerciceDTO(String label) {
+		super();
+		this.label = label;
+	}
+    
+    
+    
+    
+    
 }
