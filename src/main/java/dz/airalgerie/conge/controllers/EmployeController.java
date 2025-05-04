@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/api/employes")
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
 public class EmployeController {
 
     @Autowired
@@ -43,20 +44,29 @@ public class EmployeController {
     private AffectationRepository affectationRepository;
    
     @PostMapping("/create")
-    public ResponseEntity<?> createEmploye(@RequestBody EmployeDTO dto) {
-        Role        role        = roleRepository.findById(dto.getRoleId())  
-                                 .orElseThrow(() -> new RuntimeException("Role not found"));
-        Fonction    fonction    = fonctionRepository.findById(dto.getIdFonction())
-                                 .orElseThrow(() -> new RuntimeException("Fonction not found"));
+    public ResponseEntity<String> createEmploye(@RequestBody EmployeDTO dto) {
+        Role role = roleRepository.findById(dto.getRoleId())
+            .orElseThrow(() -> new RuntimeException("Role not found"));
+        Fonction fonction = fonctionRepository.findById(dto.getIdFonction())
+            .orElseThrow(() -> new RuntimeException("Fonction not found"));
         Affectation affectation = affectationRepository.findById(dto.getIdAffectation())
-                                 .orElseThrow(() -> new RuntimeException("Affectation not found"));
+            .orElseThrow(() -> new RuntimeException("Affectation not found"));
 
-        Employe employe = new Employe(
-        );
+        Employe employe = new Employe();
+        employe.setName(dto.getName());
+        employe.setLastname(dto.getLastname());
+        employe.setDateEntree(dto.getDateEntree());
+        employe.setEmail(dto.getEmail());
+        employe.setMotdepasse(dto.getMotdepasse());
+        employe.setRole(role);
+        employe.setFonctionEntity(fonction);
+        employe.setAffectationEntity(affectation);
 
         employeRepository.save(employe);
+
         return ResponseEntity.ok("Compte créé avec succès !");
     }
+
 
 //    @GetMapping("/all")
 //    public List<DmdConge> getAllDmdConges() {

@@ -15,9 +15,11 @@ import dz.airalgerie.conge.repositories.EmployeRepository;
 import dz.airalgerie.conge.repositories.TypeDeCongeRepository;
 import dz.airalgerie.conge.services.DmdCongeService;
 import lombok.RequiredArgsConstructor;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/dmdconge")
+@CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
 @RequiredArgsConstructor
 public class DmdCongeController {
 
@@ -55,8 +57,15 @@ public class DmdCongeController {
     }
 
     @GetMapping("/all")
-    public List<DmdConge> getAllDmdConges() {
-    	return dmdCongeService.getAllDemandes();
+    public ResponseEntity<List<DmdCongeDTO>> getAllDmdConges() {
+        List<DmdCongeDTO> dtos = dmdCongeService.getAllDemandes().stream()
+            .map(d -> new DmdCongeDTO(
+                d.getDatededamande(),                    // date de la demande
+                d.getDuree() //matricule
+            ))
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
+
    
 }

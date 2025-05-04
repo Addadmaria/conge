@@ -22,5 +22,7 @@ public class TypeDeConge {
     @Column(name = "nameofleave", nullable = false, unique = true)
     private String nameOfLeave;
 
-    
+	public Long getId() {
+		return id;
+	}
 }

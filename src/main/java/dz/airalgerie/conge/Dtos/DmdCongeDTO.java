@@ -1,12 +1,14 @@
 package dz.airalgerie.conge.Dtos;
 
-import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.*;
 
+import dz.airalgerie.conge.entities.Employe;
+import dz.airalgerie.conge.entities.TypeDeConge;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,11 +19,11 @@ public class DmdCongeDTO {
     private Integer matricule;
     private Integer type_conge;
     
-    public DmdCongeDTO(Date datededamande, int duree, Integer matricule, Integer typeconge) {
+    public DmdCongeDTO(Date datededamande, int duree) {
         this.datededamande = datededamande;
         this.duree = duree;
-        this.matricule = matricule;
-        this.type_conge = typeconge;
+        //this.matricule = matricule;
+        //this.type_conge = typeconge;
     }
 
 	public Date getDatededamande() {

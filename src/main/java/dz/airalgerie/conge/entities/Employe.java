@@ -76,6 +76,50 @@ import java.time.LocalDate;
 		    private Fonction fonctionEntity;
 
 		    
-		    
-		    
+
+		    public void setName(String name) { this.name = name; }
+		    public void setLastname(String lastname) { this.lastname = lastname; }
+		    public void setDateEntree(LocalDate dateEntree) { this.dateEntree = dateEntree; }
+		    public void setEmail(String email) { this.email = email; }
+		    public void setMotdepasse(String motdepasse) { this.motdepasse = motdepasse; }
+		    public void setRole(Role role) { this.role = role; }
+		    public void setAffectationEntity(Affectation affectationEntity) { this.affectationEntity = affectationEntity; }
+		    public void setFonctionEntity(Fonction fonctionEntity) { this.fonctionEntity = fonctionEntity; }
+
+		    public Integer getMatricule() {
+		        return matricule;
+		    }
+
+		    public LocalDate getDateEntree() {
+		        return dateEntree;
+		    }
+
+		    public String getName() {
+		        return name;
+		    }
+
+		    public String getLastname() {
+		        return lastname;
+		    }
+
+		    public String getEmail() {
+		        return email;
+		    }
+
+		    public String getMotdepasse() {
+		        return motdepasse;
+		    }
+
+		    public Role getRole() {
+		        return role;
+		    }
+
+		    public Affectation getAffectationEntity() {
+		        return affectationEntity;
+		    }
+
+		    public Fonction getFonctionEntity() {
+		        return fonctionEntity;
+		    }
+
 		}
