@@ -8,11 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -48,15 +44,5 @@ public class Exercice {
 
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public Exercice() {
-		super();
-		this.label = label;
-	}
-
-	
-
-   
-    
+	} 
 }
