@@ -2,7 +2,7 @@ package dz.airalgerie.conge.Dtos;
 
 import java.time.LocalDate;
 
-public class EmployeDTO {
+public class UserDTO {
     private Integer matricule;
     private String name;
     private String lastname;
@@ -13,10 +13,10 @@ public class EmployeDTO {
     private Long idAffectation;
     private Long idFonction;
 
-    public EmployeDTO() {
+    public UserDTO() {
     }
 
-    public EmployeDTO(Integer matricule, String name, String lastname, LocalDate dateEntree,
+    public UserDTO(Integer matricule, String name, String lastname, LocalDate dateEntree,
                       String email, String motdepasse, Long roleId, Long idAffectation, Long idFonction) {
         this.matricule = matricule;
         this.name = name;

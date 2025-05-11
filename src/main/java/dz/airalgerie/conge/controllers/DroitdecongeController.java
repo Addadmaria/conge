@@ -3,11 +3,11 @@ package dz.airalgerie.conge.controllers;
 import dz.airalgerie.conge.entities.DmdConge;
 import dz.airalgerie.conge.entities.Droitdeconge;
 import dz.airalgerie.conge.Dtos.DroitdecongeDTO;
-import dz.airalgerie.conge.entities.Employe;
+import dz.airalgerie.conge.entities.User;
 import dz.airalgerie.conge.entities.Exercice;
 import dz.airalgerie.conge.entities.TypeDeConge;
 import dz.airalgerie.conge.repositories.DroitDeCongeRepository;
-import dz.airalgerie.conge.repositories.EmployeRepository;
+import dz.airalgerie.conge.repositories.UserRepository;
 import dz.airalgerie.conge.repositories.ExerciceRepository;
 import dz.airalgerie.conge.services.DroitDeCongeService;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class DroitdecongeController {
     private DroitDeCongeRepository droitDeCongeRepository;
 	
 	@Autowired
-    private EmployeRepository employeRepository;
+    private UserRepository employeRepository;
 	
 	@Autowired
     private ExerciceRepository exerciceRepository;
@@ -39,8 +39,8 @@ public class DroitdecongeController {
 	@PostMapping("/create")
 	   public ResponseEntity<?> createConge(@RequestBody  DroitdecongeDTO dto) {
 	       
-	       Employe employe = employeRepository.findById(dto.getMatricule())
-	           .orElseThrow(() -> new RuntimeException("Employe not found with id " + dto.getMatricule()));
+	       User employe = employeRepository.findById(dto.getMatricule())
+	           .orElseThrow(() -> new RuntimeException("User not found with id " + dto.getMatricule()));
 
 	       Exercice idexercice = exerciceRepository.findById(dto.getIdExercice())
 	               .orElseThrow(() -> new RuntimeException("Exercice not found"));

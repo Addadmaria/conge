@@ -29,7 +29,7 @@ public class Droitdeconge {
     @ManyToOne
     @JoinColumn(name = "matricule", nullable = false)
     @JsonProperty("matricule")
-    private Employe matricule;
+    private User matricule;
     
     @ManyToOne
     @JoinColumn(name = "idexercice", nullable = false)
@@ -60,11 +60,11 @@ public class Droitdeconge {
 		this.nbrJoursRestants = nbrJoursRestants;
 	}
 
-	public Employe getMatricule() {
+	public User getMatricule() {
 		return matricule;
 	}
 
-	public void setMatricule(Employe matricule) {
+	public void setMatricule(User matricule) {
 		this.matricule = matricule;
 	}
 
@@ -76,7 +76,7 @@ public class Droitdeconge {
 		this.idexercice = idexercice;
 	}
 
-	public Droitdeconge(int nbrJourConsommes, int nbrJoursRestants, Employe matricule, Exercice idexercice) {
+	public Droitdeconge(int nbrJourConsommes, int nbrJoursRestants, User matricule, Exercice idexercice) {
 		super();
 		this.nbrJourConsommes = nbrJourConsommes;
 		this.nbrJoursRestants = nbrJoursRestants;

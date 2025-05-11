@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Employe {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +49,7 @@ public class Employe {
 	private String lastname;
 	
 	
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	@JsonProperty("email")
 	private String email;
 	

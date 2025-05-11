@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import dz.airalgerie.conge.Dtos.DmdCongeDTO;
 import dz.airalgerie.conge.entities.DmdConge;
-import dz.airalgerie.conge.entities.Employe;
+import dz.airalgerie.conge.entities.User;
 import dz.airalgerie.conge.entities.TypeDeConge;
 import dz.airalgerie.conge.repositories.DmdCongeRepository;
-import dz.airalgerie.conge.repositories.EmployeRepository;
+import dz.airalgerie.conge.repositories.UserRepository;
 import dz.airalgerie.conge.repositories.TypeDeCongeRepository;
 import dz.airalgerie.conge.services.DmdCongeService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class DmdCongeController {
     private DmdCongeService dmdCongeService;
     
     @Autowired
-    private EmployeRepository employeRepository;
+    private UserRepository employeRepository;
     @Autowired
     private DmdCongeRepository dmdCongeRepository;
     @Autowired
@@ -36,8 +36,8 @@ public class DmdCongeController {
     @PostMapping("/create")
     public ResponseEntity<?> createConge(@RequestBody  DmdCongeDTO dto) {
         
-        Employe employe = employeRepository.findById(dto.getMatricule())
-            .orElseThrow(() -> new RuntimeException("Employe not found with id " + dto.getMatricule()));
+        User employe = employeRepository.findById(dto.getMatricule())
+            .orElseThrow(() -> new RuntimeException("User not found with id " + dto.getMatricule()));
 
         TypeDeConge typeConge = typeDeCongeRepository.findById(dto.getType_conge())
                 .orElseThrow(() -> new RuntimeException("TypeConge not found"));
@@ -47,7 +47,8 @@ public class DmdCongeController {
                 dto.getDatededamande(),
                 dto.getDuree(),
                 employe,
-                typeConge
+                typeConge,
+                dto.getStatus()
             );
 
 
@@ -60,7 +61,7 @@ public class DmdCongeController {
     public ResponseEntity<List<DmdCongeDTO>> getAllDmdConges() {
         List<DmdCongeDTO> dtos = dmdCongeService.getAllDemandes().stream()
             .map(d -> new DmdCongeDTO(
-                d.getDatededamande(),                    // date de la demande
+                d.getDateDeDemande(),                    // date de la demande
                 d.getDuree() //matricule
             ))
             .collect(Collectors.toList());

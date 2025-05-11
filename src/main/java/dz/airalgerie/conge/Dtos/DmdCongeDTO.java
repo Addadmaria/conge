@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.*;
 
-import dz.airalgerie.conge.entities.Employe;
+import dz.airalgerie.conge.entities.User;
 import dz.airalgerie.conge.entities.TypeDeConge;
 @Data
 @AllArgsConstructor
@@ -18,14 +18,16 @@ public class DmdCongeDTO {
     private int duree;
     private Integer matricule;
     private Integer type_conge;
-    
+    private String status;
+
     public DmdCongeDTO(Date datededamande, int duree) {
         this.datededamande = datededamande;
         this.duree = duree;
+		this.status = "PENDING";
         //this.matricule = matricule;
         //this.type_conge = typeconge;
     }
-
+	
 	public Date getDatededamande() {
 		return datededamande;
 	}
@@ -58,7 +60,13 @@ public class DmdCongeDTO {
 		this.type_conge = type_conge;
 	}
 
-    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
 
 

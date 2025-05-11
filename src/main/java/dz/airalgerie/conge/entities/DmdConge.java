@@ -9,89 +9,106 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.*;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
 @Table(name = "dmdconge", schema = "dbo")
-@Data
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
 public class DmdConge {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "datededamande")
-    private Date datededamande;
+    private Date dateDeDemande;
 
     @Column(name = "duree")
     private int duree;
 
-	@Column(name = "status", columnDefinition = "varchar(255) default 'PENDING'")
+    @Column(name = "status", length = 255, columnDefinition = "varchar(255) default 'PENDING'")
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matricule")
-    private Employe matricule;
+    private User matricule;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "typeconge")
-    private TypeDeConge typeconge;
+    private TypeDeConge typeConge;
 
-	public Long getId() {
-		return id;
-	}
+    // Default constructor
+    public DmdConge() {
+        this.status = "PENDING";
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // All-args constructor
+    public DmdConge(Long id, Date dateDeDemande, int duree, String status, User matricule, TypeDeConge typeConge) {
+        this.id = id;
+        this.dateDeDemande = dateDeDemande;
+        this.duree = duree;
+        this.status = status == null ? "PENDING" : status;
+        this.matricule = matricule;
+        this.typeConge = typeConge;
+    }
 
-	public Date getDatededamande() {
-		return datededamande;
-	}
+    // Convenience constructor
+    public DmdConge(Date dateDeDemande, int duree, User matricule, TypeDeConge typeConge, String status) {
+        this.dateDeDemande = dateDeDemande;
+        this.duree = duree;
+        this.matricule = matricule;
+        this.typeConge = typeConge;
+        this.status = status == null ? "PENDING" : status;
+    }
 
-	public void setDatededamande(Date datededamande) {
-		this.datededamande = datededamande;
-	}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-	public int getDuree() {
-		return duree;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
+    public Date getDateDeDemande() {
+        return dateDeDemande;
+    }
 
-	public Employe getMatricule() {
-		return matricule;
-	}
+    public void setDateDeDemande(Date dateDeDemande) {
+        this.dateDeDemande = dateDeDemande;
+    }
 
-	public void setMatricule(Employe matricule) {
-		this.matricule = matricule;
-	}
+    public int getDuree() {
+        return duree;
+    }
 
-	public TypeDeConge getTypeconge() {
-		return typeconge;
-	}
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
 
-	public void setTypeconge(TypeDeConge typeconge) {
-		this.typeconge = typeconge;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public DmdConge(Date datededamande, int duree, Employe matricule, TypeDeConge typeconge) {
-		this.datededamande = datededamande;
-		this.duree = duree;
-		this.matricule = matricule;
-		this.typeconge = typeconge;
-	}
-    
-	
-    
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
+    public User getMatricule() {
+        return matricule;
+    }
+
+    public void setMatricule(User matricule) {
+        this.matricule = matricule;
+    }
+
+    public TypeDeConge getTypeConge() {
+        return typeConge;
+    }
+
+    public void setTypeConge(TypeDeConge typeConge) {
+        this.typeConge = typeConge;
+    }
 }
