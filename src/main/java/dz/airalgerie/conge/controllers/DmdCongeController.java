@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.ui.Model;
 import dz.airalgerie.conge.Dtos.DmdCongeDTO;
 import dz.airalgerie.conge.entities.DmdConge;
 import dz.airalgerie.conge.entities.User;
@@ -68,5 +69,4 @@ public class DmdCongeController {
         return ResponseEntity.ok(dtos);
     }
 
-   
 }

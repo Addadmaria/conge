@@ -1,17 +1,8 @@
 package dz.airalgerie.conge.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "dmdconge", schema = "dbo")
@@ -28,20 +19,21 @@ public class DmdConge {
     @Column(name = "duree")
     private int duree;
 
-    @Column(name = "status", length = 255, columnDefinition = "varchar(255) default 'PENDING'")
+    @Column(name = "status", length = 255)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "matricule")
-    private User matricule;
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "matricule")
+	private User matricule;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "typeconge")
-    private TypeDeConge typeConge;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "typeconge")
+	private TypeDeConge typeConge;
+
 
     // Default constructor
     public DmdConge() {
-        this.status = "PENDING";
+        this.status = "en cours";
     }
 
     // All-args constructor
@@ -49,7 +41,7 @@ public class DmdConge {
         this.id = id;
         this.dateDeDemande = dateDeDemande;
         this.duree = duree;
-        this.status = status == null ? "PENDING" : status;
+        this.status = resolveStatus(status);
         this.matricule = matricule;
         this.typeConge = typeConge;
     }
@@ -58,9 +50,14 @@ public class DmdConge {
     public DmdConge(Date dateDeDemande, int duree, User matricule, TypeDeConge typeConge, String status) {
         this.dateDeDemande = dateDeDemande;
         this.duree = duree;
+        this.status = resolveStatus(status);
         this.matricule = matricule;
         this.typeConge = typeConge;
-        this.status = status == null ? "PENDING" : status;
+    }
+
+    // Private helper method to resolve default status
+    private String resolveStatus(String status) {
+        return status == null ? "en cours" : status;
     }
 
     // Getters and Setters
@@ -93,7 +90,7 @@ public class DmdConge {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = resolveStatus(status);
     }
 
     public User getMatricule() {

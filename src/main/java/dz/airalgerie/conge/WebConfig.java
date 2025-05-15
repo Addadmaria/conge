@@ -1,22 +1,23 @@
-package dz.airalgerie.conge;
+// package dz.airalgerie.conge;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
+// import org.springframework.web.servlet.config.annotation.CorsRegistry;
+// import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
-public class WebConfig {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("*")
-                    .allowedOrigins("*") // or "*" for testing
-                    .allowedMethods("GET", "POST", "PUT", "DELETE")
-                    .allowedHeaders("*");
-            }
-        };
-    }
-}
+// @Configuration
+// public class WebConfig {
+//     @Bean
+//     public WebMvcConfigurer corsConfigurer() {
+//         return new WebMvcConfigurer() {
+//             @Override
+//             public void addCorsMappings(CorsRegistry registry) {
+//               registry.addMapping("/**")
+//                 // allow *and* file:// which reports Origin: null
+//                 .allowedOrigins("*")
+//                 .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
+//                 .allowedHeaders("*");
+//             }
+//         };
+//     }
+// }

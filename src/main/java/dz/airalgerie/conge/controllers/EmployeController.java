@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,7 @@ public class EmployeController {
     private final PasswordEncoder passwordEncoder;
    
     @PostMapping("/create")
+    // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> createUser(@RequestBody UserDTO dto) {
         Role role = roleRepository.findById(dto.getRoleId())
             .orElseThrow(() -> new RuntimeException("Role not found"));
