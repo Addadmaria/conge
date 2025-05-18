@@ -19,16 +19,13 @@ public class HomeController {
     @Autowired
     DmdCongeRepository dmdCongeRepository;
 
+    @Autowired
+    DroitDeCongeRepository droitdeconge;
+
     // Accueil page (requires authentication)
     @GetMapping("/acceuil")
     public String accueilPage() {
         return "acceuil";  // maps to templates/acceuil.html
-    }
-
-    // (Optional) other pages you listed
-    @GetMapping("/droits")
-    public String droitsPage() {
-        return "droits";
     }
 
     @GetMapping("/titres")
@@ -45,6 +42,15 @@ public class HomeController {
     public String signupPage() {
         return "signup";
     }
+
+    @GetMapping("/droits")
+    public String afficherDroits(Model model) {
+        List<Droitdeconge> droits = droitdeconge.findAll();
+        System.out.println("Droits récupérés: " + droits);
+        model.addAttribute("droits", droits);
+        return "droits";
+    }
+
 
     @GetMapping("/demandes/en-cours")
     public String afficherDemandesEnCours(Model model) {
