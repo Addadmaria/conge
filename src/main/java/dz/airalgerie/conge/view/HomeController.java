@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dz.airalgerie.conge.entities.DmdConge;
+import dz.airalgerie.conge.entities.Droitdeconge;
 import dz.airalgerie.conge.repositories.DmdCongeRepository;
+import dz.airalgerie.conge.repositories.DroitDeCongeRepository;
 
 @Controller
 public class HomeController {

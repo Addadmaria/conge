@@ -58,6 +58,7 @@ public class SecurityConfig {
               .requestMatchers(HttpMethod.POST, "/login").permitAll()
                   .requestMatchers("/error").permitAll()
               .requestMatchers("/api/auth/**").permitAll()
+              .requestMatchers("/api/employes/create").permitAll()
               .requestMatchers("/demandes/en-cours").hasRole("sous_directeur")
               .requestMatchers("/demandes/approuver").hasRole("responsable_ah")
               .anyRequest().authenticated()
