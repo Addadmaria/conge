@@ -3,6 +3,8 @@ package dz.airalgerie.conge.view;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dz.airalgerie.conge.entities.DmdConge;
 import dz.airalgerie.conge.entities.Droitdeconge;
+import dz.airalgerie.conge.entities.Exercice;
+import dz.airalgerie.conge.entities.User;
 import dz.airalgerie.conge.repositories.DmdCongeRepository;
 import dz.airalgerie.conge.repositories.DroitDeCongeRepository;
+import dz.airalgerie.conge.repositories.ExerciceRepository;
+import dz.airalgerie.conge.repositories.UserRepository;
 
 @Controller
 public class HomeController {
@@ -23,6 +29,12 @@ public class HomeController {
 
     @Autowired
     DroitDeCongeRepository droitdeconge;
+
+    @Autowired
+    UserRepository userRepo;
+
+    @Autowired
+    ExerciceRepository exerciceRepo;
 
     // Accueil page (requires authentication)
     @GetMapping("/acceuil")
@@ -46,10 +58,14 @@ public class HomeController {
     }
 
     @GetMapping("/droits")
-    public String afficherDroits(Model model) {
-        List<Droitdeconge> droits = droitdeconge.findAll();
-        System.out.println("Droits récupérés: " + droits);
-        model.addAttribute("droits", droits);
+    public String afficherDroits(@AuthenticationPrincipal UserDetails principal,
+                                 Model model) {
+        List<Droitdeconge> droits    = droitdeconge.findAll();
+        List<User>          users    = userRepo.findAll();
+        List<Exercice>      exercices= exerciceRepo.findAll();
+        model.addAttribute("droits",    droits);
+        model.addAttribute("users",     users);
+        model.addAttribute("exercices", exercices);
         return "droits";
     }
 

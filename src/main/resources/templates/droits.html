@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>Droits de congé</title>
-  <link rel="stylesheet" th:href="@{/css/droits.css}" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/droits.css}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    .modal{display:none;position:fixed;z-index:1001;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.4)}
+    .modal-content{background:#fff;margin:100px auto;padding:30px;width:400px;border-radius:10px;position:relative}
+    .close{position:absolute;top:15px;right:20px;font-size:28px;font-weight:bold;cursor:pointer}
+  </style>
 </head>
 <body>
-  <header>  
-    <div class="logo-container">
-      <img src="http://siriusalgeria.net/cs/aa1.jpg"
-           alt="Logo Air Algérie"
-           class="logo">
-    </div>
-  </header>
-
   <aside class="sidebar">
     <nav>
       <ul>
         <li><a th:href="@{/acceuil}"><i class="fas fa-home"></i><span>Accueil</span></a></li>
-        <li><a th:href="@{/droits}"><i class="fas fa-star"></i><span>Droits de congé</span></a></li>
-        <li><a th:href="@{/titres}"><i class="fas fa-file-alt"></i><span>Titres de congé</span></a></li>
+        <li><a th:href="@{/droits}"><i class="fas fa-star"></i><span>Droits</span></a></li>
+        <li><a th:href="@{/titres}"><i class="fas fa-file-alt"></i><span>Titres</span></a></li>
         <li><a th:href="@{/demandes/en-cours}"><i class="fas fa-pen"></i><span>Demandes</span></a></li>
       </ul>
     </nav>
   </aside>
-
   <main class="main-content">
     <h1>Droits de congé</h1>
-
-    <!-- Add button & modal here if needed... -->
-
-    <h3 th:if="${#lists.isEmpty(droits)}">Aucun droit de congé enregistré.</h3>
-
-    <table th:unless="${#lists.isEmpty(droits)}">
+    <button id="openModal" class="modal-btn">Ajouter un droit</button>
+    <div id="droitModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h3>Ajouter un droit de congé</h3>
+        <form id="droitForm">
+          <label>Employé :</label>
+          <select id="matricule" required>
+            <option value="" disabled selected>Choisissez un employé</option>
+            <option th:each="u : ${users}"
+                    th:value="${u.matricule}"
+                    th:text="${u.name + ' ' + u.lastname}"></option>
+          </select><br/>
+          <label>Exercice :</label>
+          <select id="exercice" required>
+            <option value="" disabled selected>Choisissez...</option>
+            <option th:each="e : ${exercices}"
+                    th:value="${e.idExercice}"
+                    th:text="${e.label}"></option>
+          </select><br/>
+          <label>Jours consommés :</label>
+          <input type="number" id="consommes" required/><br/>
+          <label>Jours restants :</label>
+          <input type="number" id="restants" required/><br/>
+          <button type="submit" class="submit-btn">Ajouter</button>
+        </form>
+        <div id="formError" style="color:red;margin-top:1em;"></div>
+      </div>
+    </div>
+    <p th:if="${#lists.isEmpty(droits)}">Aucun droit de congé enregistré.</p>
+    <table th:unless="${#lists.isEmpty(droits)}" border="1">
       <thead>
         <tr>
-          <th>Nom</th>
-          <th>Poste</th>
-          <th>Jours consommés</th>
-          <th>Jours restants</th>
-          <th>Exercice</th>
+          <th>Nom</th><th>Poste</th><th>Jours consommés</th><th>Jours restants</th><th>Exercice</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Use 'droit' as the loop variable, not 'droits' -->
-        <tr th:each="droit : ${droits}">
-          <!-- imprimons le nom et le poste depuis l'objet matricule -->
-          <td th:text="${droit.matricule.name}">NomEmployé</td>
-          <td th:text="${droit.matricule.fonctionEntity.name}">Poste</td>
-          <td th:text="${droit.nbrJourConsommes}">123</td>
-          <td th:text="${droit.nbrJoursRestants}">21</td>
-          <!-- idexercice est un objet : affichez son label -->
-          <td th:text="${droit.idexercice.label}">2025</td>
+        <tr th:each="d : ${droits}">
+          <td th:text="${d.matricule.name}">Nom</td>
+          <td th:text="${d.matricule.fonctionEntity.name}">Poste</td>
+          <td th:text="${d.nbrJourConsommes}">0</td>
+          <td th:text="${d.nbrJoursRestants}">0</td>
+          <td th:text="${d.idexercice.label}">Année</td>
         </tr>
       </tbody>
     </table>
@@ -260,4 +273,39 @@ tbody tr:hover {
 }
 
 </style>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+    const modal    = document.getElementById('droitModal'),
+          openBtn  = document.getElementById('openModal'),
+          closeBtn = document.getElementById('closeModal'),
+          form     = document.getElementById('droitForm'),
+          errDiv   = document.getElementById('formError');
+
+    openBtn.onclick  = () => modal.style.display='block';
+    closeBtn.onclick = () => modal.style.display='none';
+    window.onclick   = e => { if(e.target===modal) modal.style.display='none'; };
+
+    form.onsubmit = async e => {
+      e.preventDefault();
+      errDiv.textContent = '';
+      const payload = {
+        matricule:    +document.getElementById('matricule').value,
+        idExercice:   +document.getElementById('exercice').value,
+        nbrJourConsommes: +document.getElementById('consommes').value,
+        nbrJoursRestants: +document.getElementById('restants').value
+      };
+      try {
+        const res = await fetch('/api/droitdeconge/create', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        if(!res.ok) throw new Error(await res.text()||'Erreur serveur');
+        window.location.reload();
+      } catch(err) {
+        errDiv.textContent = err.message;
+      }
+    };
+  /*]]>*/
+  </script>
 </html>
