@@ -59,8 +59,9 @@ public class SecurityConfig {
                   .requestMatchers("/error").permitAll()
               .requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/employes/create").permitAll()
-            //   .requestMatchers("/demandes/en-cours").hasRole("sous_directeur")
-            //   .requestMatchers("/demandes/approuver").hasRole("responsable_ah")
+              .requestMatchers("/demandes/en-cours").hasRole("sous_directeur")
+              .requestMatchers("/demandes/approuver").hasRole("responsable_ah")
+              .requestMatchers("/titres").hasRole("admin")
               .anyRequest().authenticated()
           )
           // disable the built‐in formLogin
