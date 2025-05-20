@@ -15,10 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dz.airalgerie.conge.entities.DmdConge;
 import dz.airalgerie.conge.entities.Droitdeconge;
 import dz.airalgerie.conge.entities.Exercice;
+import dz.airalgerie.conge.entities.TitreConge;
 import dz.airalgerie.conge.entities.User;
 import dz.airalgerie.conge.repositories.DmdCongeRepository;
 import dz.airalgerie.conge.repositories.DroitDeCongeRepository;
 import dz.airalgerie.conge.repositories.ExerciceRepository;
+import dz.airalgerie.conge.repositories.TitreCongeRepository;
 import dz.airalgerie.conge.repositories.UserRepository;
 
 @Controller
@@ -36,21 +38,14 @@ public class HomeController {
     @Autowired
     ExerciceRepository exerciceRepo;
 
+    @Autowired
+    TitreCongeRepository titreRepo;
+
     // Accueil page (requires authentication)
     @GetMapping("/acceuil")
     public String accueilPage() {
         return "acceuil";  // maps to templates/acceuil.html
     }
-
-    @GetMapping("/titres")
-    public String titresPage() {
-        return "titres";
-    }
-
-    // @GetMapping("/demandes")
-    // public String demandesPage() {
-    //     return "demandes";
-    // }
 
     @GetMapping("/signup")
     public String signupPage() {
@@ -107,18 +102,27 @@ public class HomeController {
     }
 
     @PostMapping("/api/conge/{id}/valider")
-    public String valider(@PathVariable Integer id,
-                            RedirectAttributes attrs) {
-        DmdConge d = dmdCongeRepository.findById(id)
+    public String valider(@PathVariable Long id,
+                          RedirectAttributes attrs) {
+
+        DmdConge d = dmdCongeRepository.findByIdCustom(id)
             .orElseThrow(() -> new IllegalArgumentException("Demande introuvable: " + id));
         d.setStatus("validé");
         dmdCongeRepository.save(d);
 
+        TitreConge t = new TitreConge();
+        t.setMatricule(d.getMatricule());
+        t.setStatus("validé");
+        t.setFilePath("/titres/" + d.getId() + ".pdf");
+        t.setDateDeDemande(d.getDateDeDemande());
+        titreRepo.save(t);
+
         attrs.addFlashAttribute("message",
-            "La demande n°" + id + " a été validé.");
+            "Demande n°" + id + " validée et titre créé.");
 
         return "redirect:/demandes/approuver";
     }
+
 
     @GetMapping("/demandes/all")
     public String afficherDemandes(Model model) {

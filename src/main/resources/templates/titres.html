@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Titres de congé</title>
+  <link rel="stylesheet" th:href="@{/css/titres.css}"/>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+  <!-- Sidebar -->
+<aside class="sidebar">
+    <nav>
+      <ul>
+        <li>
+          <a th:href="@{/acceuil}">
+            <i class="fas fa-home"></i> <span>Accueil</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/droits}">
+            <i class="fas fa-star"></i> <span>Droits de congé</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/titres}">
+            <i class="fas fa-file-alt"></i> <span>Titres de congé</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/demandes/en-cours}">
+            <i class="fas fa-pen"></i> <span>Demandes</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/signup}">
+            <i class="fas fa-user-plus"></i> <span>Ajouter un employé</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- Main container -->
+  <div class="main-container">
+    <header>
+      <div class="logo-container">
+        <img src="http://siriusalgeria.net/cs/aa1.jpg"
+              alt="Logo Air Algérie"
+              class="logo">
+      </div>
+    </header>
+  <main class="main-content">
+    <h1>Mes titres de congé</h1>
+    <p th:if="${#lists.isEmpty(titres)}">Aucun titre disponible.</p>
+    <table th:unless="${#lists.isEmpty(titres)}">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom de l’employé</th>
+          <th>Statut</th>
+          <th>Fichier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="t : ${titres}">
+          <td th:text="${t.id}">1</td>
+          <td th:text="${t.matricule.name + ' ' + t.matricule.lastname}">Jean Dupont</td>
+          <td th:text="${t.status}">validé</td>
+          <td>
+            <a th:if="${t.status=='validé'}"
+               th:href="@{/api/titres/download/{id}(id=${t.id})}">
+              Télécharger
+            </a>
+            <span th:unless="${t.status=='validé'}">–</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+<style>
+    /* Réinitialisation */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  .main-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    min-height: 100vh;
+    margin-left: 90px;
+  }
+  
+  /* Header */
+  header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 90px;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 90px;
+    background-color: #d51820;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1001;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar nav ul li {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .sidebar nav ul li i {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidebar nav ul li a:hover {
+    color: #ffd1d1;
+  }
+
+/* Main container */
+.main-content {
+  margin-left: 90px;
+  padding: 100px 30px 30px;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+thead {
+  background-color: #d51c1c;
+  color: white;
+}
+
+tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Download link */
+a {
+  color: #d51820;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+</style>
+</html>
