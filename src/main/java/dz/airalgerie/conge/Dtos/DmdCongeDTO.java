@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.*;
 
-import dz.airalgerie.conge.entities.User;
-import dz.airalgerie.conge.entities.TypeDeConge;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
