@@ -47,11 +47,6 @@ public class HomeController {
         return "acceuil";  // maps to templates/acceuil.html
     }
 
-    @GetMapping("/signup")
-    public String signupPage() {
-        return "signup";
-    }
-
     @GetMapping("/errorAcces")
     public String errorAcces() {
         return "acces";

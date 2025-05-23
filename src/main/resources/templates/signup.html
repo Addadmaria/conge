@@ -1,73 +1,271 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Inscription - Air Algérie</title>
-  <link rel="stylesheet" href="/css/signup.css">
+  <meta charset="UTF-8"/>
+  <title>Créer un compte – Air Algérie</title>
+  <link rel="stylesheet" th:href="@{/css/acceuil.css}"/>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  .main-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    min-height: 100vh;
+    margin-left: 90px;
+  }
+  
+  /* Header */
+  header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 90px;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 90px;
+    background-color: #d51820;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1001;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar nav ul li {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .sidebar nav ul li i {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidebar nav ul li a:hover {
+    color: #ffd1d1;
+  }
+  
+  /* Main */
+  .main-content {
+    margin-left: 90px;
+    padding: 100px 30px 30px 30px;
+  }
+  
+  /* Table */
+  h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+    .signup-form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 100px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .signup-form h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .signup-form .form-group {
+      margin-bottom: 15px;
+    }
+    .signup-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .signup-form input,
+    .signup-form select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .signup-form button {
+      background-color: #d51820;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .signup-form button:hover {
+      background-color: #b01616;
+    }
+    #errorMsg {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <header>…logo/header here…</header>
+  <div th:replace="fragments/sidebar :: sidebar"></div>
 
-  <main class="signup-container">
-    <div class="signup-box">
-      <h2 class="signup-title">Créer un compte employé</h2>
-      <form id="signupForm">
-        <!-- all your inputs with id="name", "lastname", etc. -->
-        <button type="submit" class="btn-signup">S'inscrire</button>
-        <div id="errorMessage" class="error-message"></div>
-      </form>
-    </div>
-  </main>
+  <div class="main-content">
+    <header>
+      <div class="logo-container">
+        <img src="http://siriusalgeria.net/cs/aa1.jpg"
+              alt="Logo Air Algérie"
+              class="logo">
+      </div>
+    </header>
+    <form id="signupForm" class="signup-form">
+      <h2>Créer un compte employé</h2>
 
-  
-  <!-- <script>
-    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
-    if (user.role !== 'ROLE_ADMIN') {
-      window.location.href = '/login.html';
-    }
-  </script> -->
-  
-  <script>
-    document.getElementById('signupForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    const data = {
-        name: document.getElementById('name').value,
-        lastname: document.getElementById('lastname').value,
-        dateEntree: document.getElementById('dateEntree').value,
-        email: document.getElementById('email').value,
-        motdepasse: document.getElementById('motdepasse').value,
-        roleId: parseInt(document.getElementById('roleId').value, 10),
-        idAffectation: parseInt(document.getElementById('idAffectation').value, 10),
-        idFonction: parseInt(document.getElementById('idFonction').value, 10)
-    };
+      <div class="form-group">
+        <label for="name">Prénom</label>
+        <input type="text" id="name" name="name" required/>
+      </div>
 
-    // optional: confirm passwords match
-    if (data.motdepasse !== document.getElementById('confirmPassword').value) {
-        return document.getElementById('errorMessage').innerText = 
-        'Passwords do not match';
-    }
+      <div class="form-group">
+        <label for="lastname">Nom</label>
+        <input type="text" id="lastname" name="lastname" required/>
+      </div>
 
-    try {
-        const resp = await fetch('/api/employes/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            // include JWT cookie automatically; no Authorization header needed
-        },
-        body: JSON.stringify(data)
+      <div class="form-group">
+        <label for="dateEntree">Date d’entrée</label>
+        <input type="date" id="dateEntree" name="dateEntree" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="motdepasse">Mot de passe</label>
+        <input type="password" id="motdepasse" name="motdepasse" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="roleId">Rôle</label>
+        <select id="roleId" name="roleId" required>
+          <option value="" disabled selected>Choisissez un rôle</option>
+          <option th:each="r : ${roles}"
+                  th:value="${r.id}"
+                  th:text="${r.label}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="idFonction">Fonction</label>
+        <select id="idFonction" name="idFonction" required>
+          <option value="" disabled selected>Choisissez une fonction</option>
+          <option th:each="f : ${fonctions}"
+                  th:value="${f.id}"
+                  th:text="${f.name}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="idAffectation">Affectation</label>
+        <select id="idAffectation" name="idAffectation" required>
+          <option value="" disabled selected>Choisissez une affectation</option>
+          <option th:each="a : ${affectations}"
+                  th:value="${a.id}"
+                  th:text="${a.name}"></option>
+        </select>
+      </div>
+
+      <button type="submit">Créer le compte</button>
+      <div id="errorMsg"></div>
+    </form>
+  </div>
+
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const form     = document.getElementById('signupForm'),
+          errorDiv = document.getElementById('errorMsg');
+
+    form.onsubmit = async e => {
+      e.preventDefault();
+      errorDiv.textContent = '';
+
+      const payload = {
+        name:         document.getElementById('name').value,
+        lastname:     document.getElementById('lastname').value,
+        dateEntree:   document.getElementById('dateEntree').value,
+        email:        document.getElementById('email').value,
+        motdepasse:   document.getElementById('motdepasse').value,
+        roleId:       +document.getElementById('roleId').value,
+        idFonction:   +document.getElementById('idFonction').value,
+        idAffectation:+document.getElementById('idAffectation').value
+      };
+
+      try {
+        const res = await fetch('/api/employes/create', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
         });
-
-        if (!resp.ok) {
-        const text = await resp.text();
-        throw new Error(text);
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(text || 'Erreur serveur');
         }
-        alert('Employee created successfully!');
-        // optionally, clear form or redirect back to dashboard
-        window.location.href = '/acceuil.html';
-    } catch (err) {
-        document.getElementById('errorMessage').innerText = err.message;
-    }
-    });
+        alert('Compte créé avec succès !');
+        window.location.href = '/signup';
+      } catch (err) {
+        errorDiv.textContent = err.message;
+      }
+    };
+    /*]]>*/
   </script>
 </body>
 </html>
