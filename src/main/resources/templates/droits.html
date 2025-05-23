@@ -18,8 +18,13 @@
     <header>
       <div class="logo-container">
         <img src="http://siriusalgeria.net/cs/aa1.jpg"
-              alt="Logo Air Algérie"
-              class="logo">
+             alt="Logo Air Algérie"
+             class="logo">
+      </div>
+      <div class="user-actions">
+        <form th:action="@{/logout}" method="post" style="display:inline">
+          <button type="submit" class="btn-logout">Déconnexion</button>
+        </form>
       </div>
     </header>
     <h1>Droits de congé</h1>
