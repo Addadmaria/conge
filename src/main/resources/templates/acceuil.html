@@ -24,7 +24,9 @@
       </div>
       <div class="user-actions">
         <form th:action="@{/logout}" method="post" style="display:inline">
+          
           <button type="submit" class="btn-logout">Déconnexion</button>
+
         </form>
       </div>
     </header>
@@ -59,21 +61,21 @@
 <style>
   /* Body avec background image */
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-image: url('https://www.aerotime.aero/images/Air-Algerie-Boeing.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center 60px;
-}
+    margin: 0;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('https://www.aerotime.aero/images/Air-Algerie-Boeing.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 60px;
+  }
 
-/* Masque blanc léger pour lire les textes */
-.main-container {
-  background-color: rgba(255, 255, 255, 0.3); /* beaucoup plus transparent */
-  min-height: 100vh;
-  margin-left: 90px;
-}
+  /* Masque blanc léger pour lire les textes */
+  .main-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    min-height: 100vh;
+    margin-left: 90px;
+  }
 
 /* Header */
 header {
@@ -198,6 +200,39 @@ header {
 .card button:hover {
   background-color: #b2151b;
 }
+
+.btn-logout {
+   margin-left: 18cm;
+    background-color: #d51820;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  .btn-logout:hover {
+    background-color: #b01616;
+  }
+  notif-btn {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
+}
+
+.notif-btn .badge {
+  position: absolute;
+  top: -4px; right: -6px;
+  background: #d51820;
+  color: white;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 8px;
+}
+
 
 </style>
 </html>

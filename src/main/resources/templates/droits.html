@@ -77,58 +77,46 @@
   </main>
 </body>
 <style>
-    /* Réinitialisation de base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  /* Background identique à la page d’accueil */
+    body {
+      margin: 0;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://www.aerotime.aero/images/Air-Algerie-Boeing.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center 60px;
+      color: #333;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-}
+    /* Masque blanc léger sur tout le contenu */
+    .main-content {
+      background-color: rgba(255, 255, 255, 0.3);
+      margin-left: 90px; /* laisse la place à la sidebar */
+      padding: 100px 30px 30px;
+      min-height: 100vh;
+    }
 
-.main-container {
-  background-color: rgba(255, 255, 255, 0.3);
-  min-height: 100vh;
-  margin-left: 90px; /* à cause du sidebar */
-}
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 90px;
+      right: 0;
+      height: 70px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .logo-container img {
+      height: 50px;
+    }
 
-/* === Header === */
-header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 90px; /* pour ne pas passer sous la sidebar */
-  height: 70px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.logo {
-  height: 50px;
-  width: auto;
-}
-
-.company-name {
-  color: #c00;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* === Sidebar === */
-.sidebar {
+    /* Sidebar */
+    .sidebar {
   width: 90px;
   background-color: #d51820;
   color: white;
@@ -149,7 +137,7 @@ header {
 }
 
 .sidebar nav ul li {
-  margin: 20px 0;
+  margin: 22px 0;
   text-align: center;
   font-size: 12px;
   cursor: pointer;
@@ -173,110 +161,133 @@ header {
   color: #ffd1d1;
 }
 
-/* === Main Content === */
-.main-content {
-  margin-left: 90px; /* espace pour sidebar */
-  padding: 100px 30px 30px 30px; /* espace pour header */
-}
+    /* Boutons */
+    .modal-btn, .submit-btn {
+      padding: 10px 20px;
+      background-color: #d51c1c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .modal-btn:hover, .submit-btn:hover {
+      background-color: #b01616;
+    }
 
-/* === Table === */
-h1 {
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
+    /* Table */
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  margin-top: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
 th, td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
 thead {
-  background-color: #d51c1c;
-  color: white;
-}
-
+      background-color: #d51c1c;
+      color: white;
+    }
 tbody tr:hover {
-  background-color: #f0f0f0;
-}
+      background-color: #f0f0f0;
+    }
 
-/* === Boutons === */
-.modal-btn, .submit-btn {
-  padding: 10px 20px;
-  background-color: #d51c1c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.modal-btn:hover, .submit-btn:hover {
-  background-color: #b01616;
-}
-
-/* === Modal === */
+    /* Modal « avant » amélioré */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1001;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-
+      display: none;
+      position: fixed;
+      z-index: 1002;
+      inset: 0;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(2px);
+      align-items: center;
+      justify-content: center;
+    }
 .modal-content {
-  background-color: white;
-  margin: 100px auto;
-  padding: 30px;
-  border: 1px solid #888;
-  width: 400px;
-  border-radius: 10px;
-  position: relative;
-}
+      background-color: #fff;
+      width: 380px;
+      max-width: 90%;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      position: relative;
+      animation: slideIn 0.3s ease-out forwards;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-content h3 {
+      margin-bottom: 16px;
+      font-size: 20px;
+      color: #d51c1c;
+    }
+    .modal-content .close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 20px;
+      color: #666;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .modal-content .close:hover {
+      color: #333;
+    }
+    #droitForm {
+      display: flex;
+      flex-direction: column;
+    }
+    #droitForm label {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #555;
+    }
+    #droitForm input,
+    #droitForm select {
+      padding: 10px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    #droitForm input:focus,
+    #droitForm select:focus {
+      outline: none;
+      border-color: #d51c1c;
+    }
 
-.close {
-  color: #aaa;
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .btn-logout {
+  margin-left: 30cm;
+    background-color: #d51820;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  .btn-logout:hover {
+    background-color: #b01616;
+  }
 
-.close:hover {
-  color: black;
-}
+   </style>
+</head>
 
-.modal-content label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
 
-.modal-content input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-</style>
+ 
 <script th:inline="javascript">
   /*<![CDATA[*/
     const modal    = document.getElementById('droitModal'),

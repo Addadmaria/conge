@@ -56,12 +56,13 @@ public class SecurityConfig {
           .authorizeHttpRequests(authz -> authz
               .requestMatchers(HttpMethod.GET, "/login", "/css/**", "/js/**").permitAll()
               .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                  .requestMatchers("/error").permitAll()
+                //.requestMatchers("/error").permitAll()
               .requestMatchers("/api/auth/**").permitAll()
-              .requestMatchers("/signup").hasRole("admin")
-              .requestMatchers("/demandes/en-cours").hasRole("sous_directeur")
-              .requestMatchers("/demandes/approuver").hasRole("responsable_ah")
-              .requestMatchers("/titres").hasRole("admin")
+              .requestMatchers("/api/employes/create").permitAll()
+              .requestMatchers("/signup").hasAnyRole("admin","directeur")
+              .requestMatchers("/demandes/en-cours").hasAnyRole("sous_directeur","directeur")
+              .requestMatchers("/demandes/approuver").hasAnyRole("responsable_ah","directeur")
+              .requestMatchers("/titres").hasRole("directeur")
               .anyRequest().authenticated()
           )
           // disable the built‐in formLogin

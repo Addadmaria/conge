@@ -28,7 +28,52 @@
   <main class="main-content">
     <h1>Mes titres de congé</h1>
     <p th:if="${#lists.isEmpty(titres)}">Aucun titre disponible.</p>
-    <table th:unless="${#lists.isEmpty(titres)}">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom de l’employé</th>
+          <th>Statut</th>
+          <th>Fichier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td >5</td>
+          <td>houssine A</td>
+          <td >validé</td>
+          <td>
+            <a >
+              Télécharger
+            </a>
+            <span >–</span>
+          </td>
+        </tr>
+        <tr >
+          <td >6</td>
+          <td>nada AD</td>
+          <td >validé</td>
+          <td>
+            <a >
+              Télécharger
+            </a>
+            <span >–</span>
+          </td>
+        </tr><tr >
+          <td >7</td>
+          <td>djamel ZZ</td>
+          <td >validé</td>
+          <td>
+            <a >
+              Télécharger
+            </a>
+            <span >–</span>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- <table th:unless="${#lists.isEmpty(titres)}">
       <thead>
         <tr>
           <th>ID</th>
@@ -51,7 +96,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </main>
 </body>
 <style>
@@ -63,10 +108,16 @@
   }
   
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    margin: 0;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('https://www.aerotime.aero/images/Air-Algerie-Boeing.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 60px;
   }
-  
+
+  /* Masque blanc léger pour lire les textes */
   .main-container {
     background-color: rgba(255, 255, 255, 0.3);
     min-height: 100vh;
@@ -189,6 +240,20 @@ a {
 a:hover {
   text-decoration: underline;
 }
+.btn-logout {
+  margin-left: 30cm;
+    background-color: #d51820;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  .btn-logout:hover {
+    background-color: #b01616;
+  }
+
 
 </style>
 </html>
