@@ -71,8 +71,11 @@ public class SecurityConfig {
               sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
           // our auth provider + JWT filter
           .authenticationProvider(authenticationProvider())
-          .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+          .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
 
+          .exceptionHandling(ex -> ex
+            .accessDeniedPage("/errorAcces")
+          );
         return http.build();
     }
 

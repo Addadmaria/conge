@@ -12,17 +12,16 @@
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <nav>
-      <ul>
-        <li><a th:href="@{/acceuil}"><i class="fas fa-home"></i><span>Accueil</span></a></li>
-        <li><a th:href="@{/droits}"><i class="fas fa-star"></i><span>Droits</span></a></li>
-        <li><a th:href="@{/titres}"><i class="fas fa-file-alt"></i><span>Titres</span></a></li>
-        <li><a th:href="@{/demandes/en-cours}"><i class="fas fa-pen"></i><span>Demandes</span></a></li>
-      </ul>
-    </nav>
-  </aside>
+  <div th:replace="fragments/sidebar :: sidebar"></div>
+
   <main class="main-content">
+    <header>
+      <div class="logo-container">
+        <img src="http://siriusalgeria.net/cs/aa1.jpg"
+              alt="Logo Air Algérie"
+              class="logo">
+      </div>
+    </header>
     <h1>Droits de congé</h1>
     <button id="openModal" class="modal-btn">Ajouter un droit</button>
     <div id="droitModal" class="modal">

@@ -1,0 +1,20 @@
+<!-- src/main/resources/templates/fragments/sidebar.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <aside th:fragment="sidebar" class="sidebar">
+      <nav>
+        <ul>
+          <li><a th:href="@{/acceuil}"><i class="fas fa-home"></i><span>Accueil</span></a></li>
+          <li><a th:href="@{/signup}"><i class="fas fa-user-plus"></i><span>Ajouter un employé</span></a></li>
+          <li><a th:href="@{/droits}"><i class="fas fa-star"></i><span>Droits</span></a></li>
+          <li><a th:href="@{/mes-demandes}"><i class="fas fa-list"></i><span>Mes demandes</span></a></li>
+          <li><a th:href="@{/demandes/en-cours}"><i class="fas fa-clock"></i><span>En cours</span></a></li>
+          <li><a th:href="@{/demandes/approuver}"><i class="fas fa-check"></i><span>Approuvées</span></a></li>
+          <li><a th:href="@{/demandes/all}"><i class="fas fa-th-list"></i><span>Toutes demandes</span></a></li>
+          <li><a th:href="@{/titres}"><i class="fas fa-file-alt"></i><span>Titres</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+  </body>
+</html>

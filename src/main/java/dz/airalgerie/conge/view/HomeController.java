@@ -52,6 +52,11 @@ public class HomeController {
         return "signup";
     }
 
+    @GetMapping("/errorAcces")
+    public String errorAcces() {
+        return "acces";
+    }
+
     @GetMapping("/droits")
     public String afficherDroits(@AuthenticationPrincipal UserDetails principal,
                                  Model model) {

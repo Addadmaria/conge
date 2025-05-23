@@ -11,37 +11,8 @@
 <body>
 
   <!-- Sidebar -->
-  <aside class="sidebar">
-    <nav>
-      <ul>
-        <li>
-          <a th:href="@{/acceuil}">
-            <i class="fas fa-home"></i> <span>Accueil</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/droits}">
-            <i class="fas fa-star"></i> <span>Droits de congé</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/titres}">
-            <i class="fas fa-file-alt"></i> <span>Titres de congé</span>
-          </a>
-        </li>
-        <li sec:authorize="hasAuthority('ADMIN')">
-          <a th:href="@{/demandes/en-cours}">
-            <i class="fas fa-pen"></i> <span>Demandes</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/signup}">
-            <i class="fas fa-user-plus"></i> <span>Ajouter un employé</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </aside>
+  <div th:replace="fragments/sidebar :: sidebar"></div>
+
 
   <!-- Main container -->
   <div class="main-container">
